@@ -1,0 +1,1893 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sanketana — Beyond Coding, Towards Creation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ========================================
+   DESIGN TOKENS
+   ======================================== */
+      :root {
+        /* Navy Scale */
+        --navy-950: hsl(218, 50%, 6%);
+        --navy-900: hsl(218, 48%, 10%);
+        --navy-800: hsl(218, 45%, 16%);
+        --navy-700: hsl(218, 42%, 22%);
+        --navy-600: hsl(218, 40%, 30%);
+        --navy-500: hsl(218, 38%, 38%);
+        --navy-400: hsl(218, 30%, 50%);
+        --navy-300: hsl(218, 28%, 65%);
+        --navy-200: hsl(218, 25%, 80%);
+        --navy-100: hsl(218, 22%, 90%);
+        --navy-50: hsl(218, 20%, 96%);
+
+        /* Gold Scale */
+        --gold-900: hsl(38, 70%, 18%);
+        --gold-800: hsl(38, 72%, 28%);
+        --gold-700: hsl(38, 75%, 35%);
+        --gold-600: hsl(38, 78%, 42%);
+        --gold-500: hsl(38, 80%, 50%);
+        --gold-400: hsl(38, 82%, 58%);
+        --gold-300: hsl(38, 85%, 68%);
+        --gold-200: hsl(38, 80%, 80%);
+        --gold-100: hsl(38, 70%, 90%);
+        --gold-50: hsl(38, 60%, 96%);
+
+        /* Grey Scale (warm-saturated) */
+        --grey-900: hsl(220, 15%, 13%);
+        --grey-800: hsl(220, 12%, 22%);
+        --grey-700: hsl(220, 10%, 34%);
+        --grey-600: hsl(220, 8%, 45%);
+        --grey-500: hsl(220, 6%, 55%);
+        --grey-400: hsl(220, 6%, 65%);
+        --grey-300: hsl(220, 8%, 78%);
+        --grey-200: hsl(220, 10%, 88%);
+        --grey-100: hsl(220, 12%, 94%);
+        --grey-50: hsl(220, 14%, 97%);
+
+        /* Semantic */
+        --bg-primary: hsl(220, 20%, 98%);
+        --bg-section: hsl(218, 50%, 6%);
+        --text-primary: var(--navy-900);
+        --text-secondary: var(--grey-600);
+        --text-tertiary: var(--grey-400);
+        --text-on-dark: hsl(220, 20%, 92%);
+        --text-on-dark-dim: hsl(220, 15%, 60%);
+        --accent: var(--gold-500);
+        --accent-hover: var(--gold-400);
+
+        /* Typography */
+        --font-display: "Playfair Display", Georgia, serif;
+        --font-display-italic: "Instrument Serif", Georgia, serif;
+        --font-body: "DM Sans", system-ui, sans-serif;
+
+        /* Spacing */
+        --sp-1: 4px;
+        --sp-2: 8px;
+        --sp-3: 12px;
+        --sp-4: 16px;
+        --sp-5: 20px;
+        --sp-6: 24px;
+        --sp-8: 32px;
+        --sp-10: 40px;
+        --sp-12: 48px;
+        --sp-16: 64px;
+        --sp-20: 80px;
+        --sp-24: 96px;
+        --sp-32: 128px;
+
+        /* Shadows */
+        --shadow-sm:
+          0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+        --shadow-md:
+          0 4px 12px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.04);
+        --shadow-lg:
+          0 12px 40px rgba(0, 0, 0, 0.09), 0 4px 12px rgba(0, 0, 0, 0.04);
+        --shadow-xl:
+          0 24px 60px rgba(0, 0, 0, 0.12), 0 8px 20px rgba(0, 0, 0, 0.06);
+        --shadow-gold: 0 8px 30px hsla(38, 80%, 50%, 0.2);
+
+        /* Radius */
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+        --radius-xl: 16px;
+
+        /* Easing */
+        --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      /* ========================================
+   RESET & BASE
+   ======================================== */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      body {
+        font-family: var(--font-body);
+        color: var(--text-primary);
+        background: var(--bg-primary);
+        line-height: 1.6;
+        font-weight: 400;
+        overflow-x: hidden;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* ========================================
+   UTILITY
+   ======================================== */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--sp-8);
+      }
+
+      .section-label {
+        font-family: var(--font-body);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold-500);
+        display: flex;
+        align-items: center;
+        gap: var(--sp-3);
+        margin-bottom: var(--sp-4);
+      }
+      .section-label::before {
+        content: "";
+        width: 32px;
+        height: 1.5px;
+        background: var(--gold-500);
+      }
+
+      .section-title {
+        font-family: var(--font-display);
+        font-weight: 500;
+        line-height: 1.15;
+        color: var(--navy-900);
+      }
+
+      .section-title--light {
+        color: var(--text-on-dark);
+      }
+
+      /* Stagger animation */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        animation: fadeUp 0.8s var(--ease-out) forwards;
+      }
+      @keyframes fadeUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .reveal-d1 {
+        animation-delay: 0.1s;
+      }
+      .reveal-d2 {
+        animation-delay: 0.25s;
+      }
+      .reveal-d3 {
+        animation-delay: 0.4s;
+      }
+      .reveal-d4 {
+        animation-delay: 0.55s;
+      }
+      .reveal-d5 {
+        animation-delay: 0.7s;
+      }
+      .reveal-d6 {
+        animation-delay: 0.85s;
+      }
+
+      /* ========================================
+   NAVIGATION
+   ======================================== */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: hsla(220, 20%, 98%, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid hsla(218, 30%, 80%, 0.3);
+        transition:
+          background 0.3s,
+          box-shadow 0.3s;
+      }
+      .nav.scrolled {
+        background: hsla(220, 20%, 98%, 0.95);
+        box-shadow: var(--shadow-sm);
+      }
+      .nav__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--sp-8);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 72px;
+      }
+      .nav__logo {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-3);
+      }
+      .nav__logo img {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+      }
+      .nav__logo-text {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--navy-900);
+        letter-spacing: -0.01em;
+      }
+      .nav__logo-sub {
+        font-size: 0.65rem;
+        font-weight: 400;
+        color: var(--text-secondary);
+        letter-spacing: 0.06em;
+        display: block;
+        margin-top: -2px;
+      }
+      .nav__links {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-10);
+        list-style: none;
+      }
+      .nav__link {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--grey-700);
+        transition: color 0.2s;
+        position: relative;
+      }
+      .nav__link::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 1.5px;
+        background: var(--gold-500);
+        transition: width 0.3s var(--ease-out);
+      }
+      .nav__link:hover {
+        color: var(--navy-900);
+      }
+      .nav__link:hover::after {
+        width: 100%;
+      }
+
+      .nav__cta {
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: var(--sp-3) var(--sp-6);
+        background: var(--navy-900);
+        color: var(--gold-300);
+        border-radius: var(--radius-sm);
+        transition: all 0.25s var(--ease-out);
+        border: 1.5px solid var(--navy-900);
+      }
+      .nav__cta:hover {
+        background: var(--gold-500);
+        color: var(--navy-950);
+        border-color: var(--gold-500);
+        box-shadow: var(--shadow-gold);
+        transform: translateY(-1px);
+      }
+
+      /* ========================================
+   HERO
+   ======================================== */
+      .hero {
+        padding: 160px 0 var(--sp-24);
+        position: relative;
+        overflow: hidden;
+        background: var(--bg-primary);
+      }
+      .hero__bg-accent {
+        position: absolute;
+        top: -200px;
+        right: -300px;
+        width: 900px;
+        height: 900px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          hsla(38, 80%, 50%, 0.06) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .hero__bg-line {
+        position: absolute;
+        top: 100px;
+        left: 60px;
+        width: 1px;
+        height: 500px;
+        background: linear-gradient(
+          to bottom,
+          transparent,
+          var(--gold-300),
+          transparent
+        );
+        opacity: 0.3;
+      }
+      .hero__inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 var(--sp-8);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--sp-16);
+        align-items: center;
+      }
+      .hero__content {
+        position: relative;
+        z-index: 2;
+      }
+      .hero__eyebrow {
+        font-family: var(--font-body);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--gold-600);
+        margin-bottom: var(--sp-6);
+        display: flex;
+        align-items: center;
+        gap: var(--sp-3);
+      }
+      .hero__eyebrow::before {
+        content: "";
+        width: 40px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold-500), var(--gold-300));
+      }
+      .hero__title {
+        font-family: var(--font-display);
+        font-size: clamp(2.8rem, 5vw, 3.75rem);
+        font-weight: 500;
+        line-height: 1.1;
+        color: var(--navy-950);
+        margin-bottom: var(--sp-6);
+        letter-spacing: -0.02em;
+      }
+      .hero__title em {
+        font-family: var(--font-display-italic);
+        font-style: italic;
+        color: var(--navy-700);
+      }
+      .hero__subtitle {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: var(--grey-600);
+        max-width: 480px;
+        margin-bottom: var(--sp-10);
+        font-weight: 400;
+      }
+      .hero__actions {
+        display: flex;
+        gap: var(--sp-4);
+        align-items: center;
+      }
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--sp-2);
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: var(--sp-4) var(--sp-8);
+        background: linear-gradient(135deg, var(--gold-500), var(--gold-600));
+        color: var(--navy-950);
+        border-radius: var(--radius-sm);
+        border: none;
+        cursor: pointer;
+        transition: all 0.25s var(--ease-out);
+      }
+      .btn-primary:hover {
+        box-shadow: var(--shadow-gold);
+        transform: translateY(-2px);
+      }
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--sp-2);
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: var(--sp-4) var(--sp-8);
+        color: var(--navy-700);
+        border: 1.5px solid var(--navy-200);
+        border-radius: var(--radius-sm);
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.25s var(--ease-out);
+      }
+      .btn-secondary:hover {
+        border-color: var(--navy-500);
+        color: var(--navy-900);
+        transform: translateY(-1px);
+      }
+
+      /* Hero image */
+      .hero__visual {
+        position: relative;
+      }
+      .hero__image-frame {
+        position: relative;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-xl);
+      }
+      .hero__image-frame img {
+        width: 100%;
+        height: 480px;
+        object-fit: cover;
+      }
+      .hero__image-frame::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: var(--radius-lg);
+        box-shadow: inset 0 0 0 1px hsla(218, 30%, 50%, 0.1);
+      }
+      /* Decorative gold corner */
+      .hero__visual::before {
+        content: "";
+        position: absolute;
+        top: -16px;
+        right: -16px;
+        width: 120px;
+        height: 120px;
+        border-top: 2px solid var(--gold-400);
+        border-right: 2px solid var(--gold-400);
+        border-radius: 0 var(--radius-md) 0 0;
+        opacity: 0.6;
+      }
+      .hero__visual::after {
+        content: "";
+        position: absolute;
+        bottom: -16px;
+        left: -16px;
+        width: 120px;
+        height: 120px;
+        border-bottom: 2px solid var(--gold-400);
+        border-left: 2px solid var(--gold-400);
+        border-radius: 0 0 0 var(--radius-md);
+        opacity: 0.6;
+      }
+
+      /* Stats bar */
+      .hero__stats {
+        display: flex;
+        gap: var(--sp-12);
+        margin-top: var(--sp-12);
+        padding-top: var(--sp-8);
+        border-top: 1px solid var(--grey-200);
+      }
+      .hero__stat-num {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--navy-900);
+        line-height: 1;
+      }
+      .hero__stat-num span {
+        color: var(--gold-500);
+      }
+      .hero__stat-label {
+        font-size: 0.8rem;
+        color: var(--grey-500);
+        margin-top: var(--sp-1);
+        font-weight: 500;
+      }
+
+      /* ========================================
+   WHY CODING — VALUES SECTION
+   ======================================== */
+      .values {
+        padding: var(--sp-24) 0;
+        background: var(--navy-950);
+        position: relative;
+        overflow: hidden;
+      }
+      .values__bg-orb {
+        position: absolute;
+        top: -200px;
+        left: -200px;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: hsla(38, 80%, 50%, 0.05);
+        filter: blur(100px);
+        pointer-events: none;
+      }
+      .values__header {
+        text-align: center;
+        margin-bottom: var(--sp-16);
+      }
+      .values__header .section-label {
+        justify-content: center;
+      }
+      .values__header .section-label::before {
+        display: none;
+      }
+      .values__header .section-title {
+        font-size: clamp(2rem, 3.5vw, 2.75rem);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .values__header .section-desc {
+        font-size: 1.05rem;
+        color: var(--text-on-dark-dim);
+        max-width: 520px;
+        margin: var(--sp-4) auto 0;
+        line-height: 1.7;
+      }
+
+      .values__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sp-8);
+      }
+      .value-card {
+        padding: var(--sp-10);
+        border-radius: var(--radius-lg);
+        background: hsla(218, 40%, 12%, 0.6);
+        border: 1px solid hsla(218, 30%, 30%, 0.25);
+        transition: all 0.3s var(--ease-out);
+        position: relative;
+      }
+      .value-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold-500),
+          transparent
+        );
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .value-card:hover {
+        border-color: hsla(38, 60%, 50%, 0.2);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+      }
+      .value-card:hover::before {
+        opacity: 1;
+      }
+
+      .value-card__icon {
+        width: 52px;
+        height: 52px;
+        border-radius: var(--radius-md);
+        background: hsla(38, 80%, 50%, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--sp-6);
+      }
+      .value-card__icon svg {
+        width: 26px;
+        height: 26px;
+        stroke: var(--gold-400);
+        fill: none;
+        stroke-width: 1.5;
+      }
+      .value-card__title {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--text-on-dark);
+        margin-bottom: var(--sp-3);
+      }
+      .value-card__desc {
+        font-size: 0.925rem;
+        color: var(--text-on-dark-dim);
+        line-height: 1.65;
+      }
+
+      /* ========================================
+   PROGRAMS
+   ======================================== */
+      .programs {
+        padding: var(--sp-24) 0;
+        background: var(--bg-primary);
+      }
+      .programs__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        margin-bottom: var(--sp-16);
+      }
+      .programs__header .section-title {
+        font-size: clamp(2rem, 3.5vw, 2.75rem);
+      }
+      .programs__header-desc {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        max-width: 400px;
+        text-align: right;
+        line-height: 1.6;
+      }
+
+      .programs__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sp-8);
+      }
+
+      .program-card {
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        background: white;
+        border: 1px solid var(--grey-200);
+        transition: all 0.3s var(--ease-out);
+        position: relative;
+      }
+      .program-card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-4px);
+        border-color: var(--gold-200);
+      }
+      .program-card__num {
+        position: absolute;
+        top: var(--sp-4);
+        left: var(--sp-4);
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--gold-400);
+        background: hsla(218, 50%, 6%, 0.7);
+        backdrop-filter: blur(8px);
+        padding: var(--sp-1) var(--sp-3);
+        border-radius: var(--radius-sm);
+        z-index: 2;
+        letter-spacing: 0.05em;
+      }
+      .program-card__image {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+      }
+      .program-card__image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s var(--ease-out);
+      }
+      .program-card:hover .program-card__image img {
+        transform: scale(1.05);
+      }
+      .program-card__image::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: linear-gradient(transparent, white);
+      }
+      .program-card__body {
+        padding: var(--sp-6) var(--sp-6) var(--sp-8);
+      }
+      .program-card__age {
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold-600);
+        margin-bottom: var(--sp-2);
+      }
+      .program-card__title {
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--navy-900);
+        margin-bottom: var(--sp-3);
+        line-height: 1.3;
+      }
+      .program-card__desc {
+        font-size: 0.875rem;
+        color: var(--grey-600);
+        line-height: 1.6;
+        margin-bottom: var(--sp-5);
+      }
+      .program-card__link {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: var(--navy-700);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--sp-2);
+        transition: all 0.2s;
+      }
+      .program-card__link:hover {
+        color: var(--gold-600);
+        gap: var(--sp-3);
+      }
+      .program-card__link svg {
+        width: 14px;
+        height: 14px;
+        transition: transform 0.2s;
+      }
+      .program-card:hover .program-card__link svg {
+        transform: translateX(3px);
+      }
+
+      /* ========================================
+   GROWTH PATH
+   ======================================== */
+      .growth {
+        padding: var(--sp-24) 0;
+        background: var(--gold-50);
+        position: relative;
+      }
+      .growth::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--gold-300),
+          transparent
+        );
+      }
+      .growth__inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--sp-16);
+        align-items: center;
+      }
+      .growth__content .section-title {
+        font-size: clamp(2rem, 3.5vw, 2.5rem);
+        margin-bottom: var(--sp-5);
+      }
+      .growth__desc {
+        font-size: 1rem;
+        color: var(--grey-600);
+        line-height: 1.7;
+        margin-bottom: var(--sp-8);
+        max-width: 480px;
+      }
+
+      .growth__levels {
+        display: flex;
+        flex-direction: column;
+        gap: var(--sp-5);
+      }
+      .growth__level {
+        display: flex;
+        gap: var(--sp-5);
+        align-items: flex-start;
+      }
+      .growth__level-marker {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-size: 0.85rem;
+        font-weight: 700;
+        border: 2px solid var(--gold-400);
+        color: var(--gold-700);
+        background: white;
+      }
+      .growth__level-info h4 {
+        font-family: var(--font-display);
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--navy-900);
+        margin-bottom: 2px;
+      }
+      .growth__level-info p {
+        font-size: 0.85rem;
+        color: var(--grey-500);
+        line-height: 1.5;
+      }
+
+      .growth__image-wrapper {
+        position: relative;
+      }
+      .growth__image-wrapper img {
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-lg);
+        width: 100%;
+      }
+
+      /* ========================================
+   TESTIMONIALS
+   ======================================== */
+      .testimonials {
+        padding: var(--sp-24) 0;
+        background: var(--bg-primary);
+      }
+      .testimonials__header {
+        text-align: center;
+        margin-bottom: var(--sp-16);
+      }
+      .testimonials__header .section-label {
+        justify-content: center;
+      }
+      .testimonials__header .section-label::before {
+        display: none;
+      }
+      .testimonials__header .section-title {
+        font-size: clamp(2rem, 3.5vw, 2.75rem);
+      }
+
+      .testimonials__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--sp-8);
+      }
+      .testimonial-card {
+        background: white;
+        border-radius: var(--radius-lg);
+        padding: var(--sp-8);
+        border: 1px solid var(--grey-200);
+        position: relative;
+        transition: all 0.3s var(--ease-out);
+      }
+      .testimonial-card:hover {
+        box-shadow: var(--shadow-md);
+        border-color: var(--gold-200);
+      }
+      .testimonial-card__quote-mark {
+        font-family: var(--font-display);
+        font-size: 4rem;
+        color: var(--gold-300);
+        line-height: 1;
+        margin-bottom: var(--sp-2);
+      }
+      .testimonial-card__text {
+        font-size: 0.925rem;
+        color: var(--grey-700);
+        line-height: 1.7;
+        margin-bottom: var(--sp-6);
+        font-style: italic;
+      }
+      .testimonial-card__stars {
+        color: var(--gold-500);
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        margin-bottom: var(--sp-5);
+      }
+      .testimonial-card__author {
+        display: flex;
+        align-items: center;
+        gap: var(--sp-3);
+        padding-top: var(--sp-5);
+        border-top: 1px solid var(--grey-100);
+      }
+      .testimonial-card__avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--gold-100);
+      }
+      .testimonial-card__name {
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: var(--navy-900);
+      }
+      .testimonial-card__role {
+        font-size: 0.8rem;
+        color: var(--grey-500);
+      }
+
+      /* ========================================
+   CTA SECTION
+   ======================================== */
+      .cta {
+        padding: var(--sp-24) 0;
+        background: var(--navy-950);
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+      .cta__orb1 {
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: hsla(38, 80%, 50%, 0.06);
+        filter: blur(80px);
+      }
+      .cta__orb2 {
+        position: absolute;
+        bottom: -100px;
+        left: -100px;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background: hsla(218, 60%, 40%, 0.08);
+        filter: blur(80px);
+      }
+      .cta .section-label {
+        justify-content: center;
+      }
+      .cta .section-label::before {
+        display: none;
+      }
+      .cta__title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 500;
+        color: var(--text-on-dark);
+        line-height: 1.15;
+        max-width: 600px;
+        margin: 0 auto var(--sp-5);
+      }
+      .cta__title em {
+        font-family: var(--font-display-italic);
+        font-style: italic;
+        color: var(--gold-400);
+      }
+      .cta__desc {
+        font-size: 1.05rem;
+        color: var(--text-on-dark-dim);
+        max-width: 480px;
+        margin: 0 auto var(--sp-10);
+        line-height: 1.7;
+      }
+      .cta__actions {
+        display: flex;
+        justify-content: center;
+        gap: var(--sp-4);
+        flex-wrap: wrap;
+      }
+      .btn-primary--bright {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--sp-2);
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: var(--sp-4) var(--sp-10);
+        background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+        color: var(--navy-950);
+        border-radius: var(--radius-sm);
+        border: none;
+        cursor: pointer;
+        transition: all 0.25s var(--ease-out);
+      }
+      .btn-primary--bright:hover {
+        box-shadow: 0 8px 30px hsla(38, 80%, 50%, 0.3);
+        transform: translateY(-2px);
+      }
+      .btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--sp-2);
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: var(--sp-4) var(--sp-8);
+        color: var(--gold-300);
+        border: 1.5px solid hsla(38, 60%, 50%, 0.3);
+        border-radius: var(--radius-sm);
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.25s var(--ease-out);
+      }
+      .btn-ghost:hover {
+        border-color: var(--gold-400);
+        color: var(--gold-200);
+        background: hsla(38, 60%, 50%, 0.08);
+      }
+
+      /* ========================================
+   FOOTER
+   ======================================== */
+      .footer {
+        background: var(--navy-900);
+        padding: var(--sp-16) 0 var(--sp-8);
+        border-top: 1px solid hsla(218, 30%, 30%, 0.3);
+      }
+      .footer__grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: var(--sp-12);
+        margin-bottom: var(--sp-12);
+      }
+      .footer__brand-name {
+        font-family: var(--font-display);
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: var(--text-on-dark);
+        margin-bottom: var(--sp-3);
+      }
+      .footer__brand-desc {
+        font-size: 0.875rem;
+        color: var(--text-on-dark-dim);
+        line-height: 1.65;
+        max-width: 300px;
+        margin-bottom: var(--sp-5);
+      }
+      .footer__socials {
+        display: flex;
+        gap: var(--sp-3);
+      }
+      .footer__social-link {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: hsla(218, 30%, 20%, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .footer__social-link:hover {
+        background: var(--gold-500);
+      }
+      .footer__social-link svg {
+        width: 16px;
+        height: 16px;
+        fill: var(--grey-300);
+      }
+      .footer__social-link:hover svg {
+        fill: var(--navy-950);
+      }
+
+      .footer__col-title {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold-400);
+        margin-bottom: var(--sp-5);
+      }
+      .footer__col-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--sp-3);
+      }
+      .footer__col-links a {
+        font-size: 0.875rem;
+        color: var(--text-on-dark-dim);
+        transition: color 0.2s;
+      }
+      .footer__col-links a:hover {
+        color: var(--gold-300);
+      }
+
+      .footer__bottom {
+        padding-top: var(--sp-8);
+        border-top: 1px solid hsla(218, 30%, 30%, 0.2);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer__copy {
+        font-size: 0.8rem;
+        color: var(--text-on-dark-dim);
+      }
+      .footer__legal {
+        display: flex;
+        gap: var(--sp-6);
+      }
+      .footer__legal a {
+        font-size: 0.8rem;
+        color: var(--text-on-dark-dim);
+        transition: color 0.2s;
+      }
+      .footer__legal a:hover {
+        color: var(--gold-300);
+      }
+
+      /* ========================================
+   FILM GRAIN (atmosphere)
+   ======================================== */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        opacity: 0.018;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 128px;
+      }
+
+      /* ========================================
+   RESPONSIVE
+   ======================================== */
+      @media (max-width: 900px) {
+        .hero__inner {
+          grid-template-columns: 1fr;
+          gap: var(--sp-10);
+        }
+        .hero__visual {
+          order: -1;
+        }
+        .hero__image-frame img {
+          height: 320px;
+        }
+        .values__grid {
+          grid-template-columns: 1fr;
+        }
+        .programs__grid {
+          grid-template-columns: 1fr;
+        }
+        .programs__header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--sp-4);
+        }
+        .programs__header-desc {
+          text-align: left;
+        }
+        .growth__inner {
+          grid-template-columns: 1fr;
+        }
+        .testimonials__grid {
+          grid-template-columns: 1fr;
+        }
+        .footer__grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .nav__links {
+          display: none;
+        }
+        .hero__stats {
+          gap: var(--sp-6);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ======== NAVIGATION ======== -->
+    <nav class="nav" id="mainNav">
+      <div class="nav__inner">
+        <a href="/" class="nav__logo">
+          <img
+            src="https://sanketana.com/wp-content/uploads/2025/12/cropped-web-logo-320x320-1.png"
+            alt="Sanketana"
+          />
+          <div>
+            <span class="nav__logo-text">Sanketana</span>
+            <span class="nav__logo-sub">Beyond Coding, Towards Creation</span>
+          </div>
+        </a>
+        <ul class="nav__links">
+          <li><a class="nav__link" href="#programs">Programs</a></li>
+          <li>
+            <a class="nav__link" href="https://sanketana.com/student-wall/"
+              >Student Wall</a
+            >
+          </li>
+          <li>
+            <a class="nav__link" href="https://sanketana.com/testimonials/"
+              >Testimonials</a
+            >
+          </li>
+          <li>
+            <a class="nav__link" href="https://sanketana.com/contact/"
+              >Contact</a
+            >
+          </li>
+          <li>
+            <a
+              class="nav__link"
+              href="https://sanketanaschool.zohocreatorportal.in/"
+              >Student Login</a
+            >
+          </li>
+        </ul>
+        <a href="https://sanketana.com/enquiry" class="nav__cta"
+          >Book Free Trial</a
+        >
+      </div>
+    </nav>
+
+    <!-- ======== HERO ======== -->
+    <section class="hero">
+      <div class="hero__bg-accent"></div>
+      <div class="hero__bg-line"></div>
+      <div class="hero__inner">
+        <div class="hero__content">
+          <p class="hero__eyebrow reveal">
+            Online Coding School for Kids & Teens.
+          </p>
+          <h1 class="hero__title reveal reveal-d1">
+            Introduce Your Child<br />to the <em>Joy of Coding</em>
+          </h1>
+          <p class="hero__subtitle reveal reveal-d2">
+            Personalized 1:1 live classes in Python, Web Development, AI and
+            more — designed for curious minds aged 8 to 18.
+          </p>
+          <div class="hero__actions reveal reveal-d3">
+            <a href="https://sanketana.com/enquiry" class="btn-primary"
+              >Book Free Trial →</a
+            >
+            <a
+              href="https://sanketana.com/wp-content/uploads/2020/09/ltp-handout.pdf"
+              class="btn-secondary"
+              >Why Coding?</a
+            >
+          </div>
+          <div class="hero__stats reveal reveal-d4">
+            <div>
+              <div class="hero__stat-num">5<span>+</span></div>
+              <div class="hero__stat-label">Years Teaching</div>
+            </div>
+            <div>
+              <div class="hero__stat-num">1:1</div>
+              <div class="hero__stat-label">Live Classes</div>
+            </div>
+            <div>
+              <div class="hero__stat-num">8<span>–</span>18</div>
+              <div class="hero__stat-label">Ages</div>
+            </div>
+            <div>
+              <div class="hero__stat-num">5<span>★</span></div>
+              <div class="hero__stat-label">Parent Rated</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero__visual reveal reveal-d2">
+          <div class="hero__image-frame">
+            <img
+              src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=800&h=600&fit=crop"
+              alt="Child coding on laptop"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== WHY CODING ======== -->
+    <section class="values">
+      <div class="values__bg-orb"></div>
+      <div class="container">
+        <div class="values__header">
+          <p class="section-label">Why Coding</p>
+          <h2 class="section-title section-title--light">
+            Skills That Shape<br />Tomorrow's Thinkers
+          </h2>
+          <p class="section-desc">
+            Coding is more than a technical skill — it's a thinking discipline
+            that builds creativity, logic, and resilience.
+          </p>
+        </div>
+        <div class="values__grid">
+          <div class="value-card">
+            <div class="value-card__icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h3 class="value-card__title">Creativity & Expression</h3>
+            <p class="value-card__desc">
+              Create games, websites and mobile apps — turning abstract ideas
+              into tangible projects that students take genuine pride in.
+            </p>
+          </div>
+          <div class="value-card">
+            <div class="value-card__icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h3 class="value-card__title">Problem Solving</h3>
+            <p class="value-card__desc">
+              Approach challenges like a software engineer — breaking complex
+              problems into logical steps through computational thinking.
+            </p>
+          </div>
+          <div class="value-card">
+            <div class="value-card__icon">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <h3 class="value-card__title">Fun & Satisfying</h3>
+            <p class="value-card__desc">
+              Watching an idea take shape step-by-step is pure joy. Students
+              build real projects they're excited to show friends and family.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== PROGRAMS ======== -->
+    <section class="programs" id="programs">
+      <div class="container">
+        <div class="programs__header">
+          <div>
+            <p class="section-label">Our Programs</p>
+            <h2 class="section-title">
+              A Thoughtful Curriculum<br />for Every Stage
+            </h2>
+          </div>
+          <p class="programs__header-desc">
+            Well-designed courses at Foundation, Intermediate and Advanced
+            levels — structured around real projects, not rote exercises.
+          </p>
+        </div>
+        <div class="programs__grid">
+          <div class="program-card">
+            <span class="program-card__num">01</span>
+            <div class="program-card__image">
+              <img
+                src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&h=400&fit=crop"
+                alt="Scratch Coding"
+              />
+            </div>
+            <div class="program-card__body">
+              <p class="program-card__age">Ages 8–10 · Foundation</p>
+              <h3 class="program-card__title">Scratch Coding</h3>
+              <p class="program-card__desc">
+                Learn coding fundamentals through visual programming. Create
+                games, animations and interactive stories in an engaging, fun
+                environment.
+              </p>
+              <a
+                href="https://sanketana.com/wp-content/uploads/2021/03/Intro-to-Coding-Level-1-all-1.pdf"
+                class="program-card__link"
+              >
+                Learn More
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="program-card">
+            <span class="program-card__num">02</span>
+            <div class="program-card__image">
+              <img
+                src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop"
+                alt="Mobile App Development"
+                style="object-fit: cover"
+              />
+            </div>
+            <div class="program-card__body">
+              <p class="program-card__age">Ages 10–13 · Foundation</p>
+              <h3 class="program-card__title">Mobile App Development</h3>
+              <p class="program-card__desc">
+                Build fully functional mobile apps using MIT App Inventor. Learn
+                to design, code and publish apps on the Google Play Store.
+              </p>
+              <a href="#" class="program-card__link">
+                Learn More
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="program-card">
+            <span class="program-card__num">03</span>
+            <div class="program-card__image">
+              <img
+                src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop"
+                alt="Python Programming"
+                style="object-fit: cover"
+              />
+            </div>
+            <div class="program-card__body">
+              <p class="program-card__age">Ages 11–15 · Intermediate</p>
+              <h3 class="program-card__title">Python Programming</h3>
+              <p class="program-card__desc">
+                Solve real-world problems with Python — one of the most popular
+                languages today and the gateway to Artificial Intelligence.
+              </p>
+              <a
+                href="https://sanketana.com/wp-content/uploads/2020/09/Sanketana-Intermediate-Curriculum-v1.pdf"
+                class="program-card__link"
+              >
+                Learn More
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="program-card">
+            <span class="program-card__num">04</span>
+            <div class="program-card__image">
+              <img
+                src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600&h=400&fit=crop"
+                alt="Web Development"
+              />
+            </div>
+            <div class="program-card__body">
+              <p class="program-card__age">Ages 12–16 · Intermediate</p>
+              <h3 class="program-card__title">Web Development</h3>
+              <p class="program-card__desc">
+                Master HTML, CSS and JavaScript to design and build websites —
+                expressing individual creativity through real web projects.
+              </p>
+              <a href="#" class="program-card__link">
+                Learn More
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="program-card">
+            <span class="program-card__num">05</span>
+            <div class="program-card__image">
+              <img
+                src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=400&fit=crop"
+                alt="Competitive Programming"
+                style="object-fit: cover"
+              />
+            </div>
+            <div class="program-card__body">
+              <p class="program-card__age">Ages 13–18 · Advanced</p>
+              <h3 class="program-card__title">Competitive Programming</h3>
+              <p class="program-card__desc">
+                Algorithms, data structures and C++ — prepare to compete in
+                programming competitions like the Indian Computing Olympiad.
+              </p>
+              <a href="#" class="program-card__link">
+                Learn More
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="program-card"
+            style="
+              background: linear-gradient(
+                135deg,
+                var(--navy-950),
+                var(--navy-800)
+              );
+              border-color: var(--navy-700);
+            "
+          >
+            <span
+              class="program-card__num"
+              style="
+                background: hsla(38, 80%, 50%, 0.15);
+                color: var(--gold-400);
+              "
+              >NEW</span
+            >
+            <div
+              class="program-card__image"
+              style="
+                background: linear-gradient(
+                  135deg,
+                  hsla(38, 80%, 50%, 0.08),
+                  hsla(218, 40%, 30%, 0.3)
+                );
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <svg
+                width="80"
+                height="80"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--gold-400)"
+                stroke-width="1"
+              >
+                <path
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="program-card__body">
+              <p class="program-card__age" style="color: var(--gold-400)">
+                Ages 10–16 · Summer 2026
+              </p>
+              <h3
+                class="program-card__title"
+                style="color: var(--text-on-dark)"
+              >
+                AI Fluency Lab
+              </h3>
+              <p
+                class="program-card__desc"
+                style="color: var(--text-on-dark-dim)"
+              >
+                Think with AI. Build with AI. Know when not to. A 12-session
+                course teaching genuine AI fluency — not just prompting tricks.
+              </p>
+              <a
+                href="https://sanketana.com/enquiry"
+                class="program-card__link"
+                style="color: var(--gold-400)"
+              >
+                Enquire Now
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== GROWTH PATH ======== -->
+    <section class="growth">
+      <div class="container growth__inner">
+        <div class="growth__content">
+          <p class="section-label">Growth Path</p>
+          <h2 class="section-title">
+            A Structured Journey<br />from Curious to Capable
+          </h2>
+          <p class="growth__desc">
+            Every child progresses through carefully designed levels — building
+            depth, not just breadth. Our curriculum connects each stage so
+            skills compound over time.
+          </p>
+          <div class="growth__levels">
+            <div class="growth__level">
+              <div class="growth__level-marker">F</div>
+              <div class="growth__level-info">
+                <h4>Foundation</h4>
+                <p>
+                  Scratch, MIT App Inventor — visual programming, logic
+                  fundamentals
+                </p>
+              </div>
+            </div>
+            <div class="growth__level">
+              <div class="growth__level-marker">I</div>
+              <div class="growth__level-info">
+                <h4>Intermediate</h4>
+                <p>
+                  Python, Web Development — real code, real-world problem
+                  solving
+                </p>
+              </div>
+            </div>
+            <div class="growth__level">
+              <div class="growth__level-marker">A</div>
+              <div class="growth__level-info">
+                <h4>Advanced</h4>
+                <p>
+                  Competitive Programming, AI — deep CS concepts, olympiad prep
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="growth__image-wrapper">
+          <img
+            src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=700&h=560&fit=crop"
+            alt="Sanketana Growth Path"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== TESTIMONIALS ======== -->
+    <section class="testimonials">
+      <div class="container">
+        <div class="testimonials__header">
+          <p class="section-label">What Parents Say</p>
+          <h2 class="section-title">Trusted by Thoughtful Families</h2>
+        </div>
+        <div class="testimonials__grid">
+          <div class="testimonial-card">
+            <div class="testimonial-card__quote-mark">"</div>
+            <p class="testimonial-card__text">
+              All sessions were well planned and engaging. My son would be ready
+              for the class and with his homework on his own initiative — that
+              was a big plus for us.
+            </p>
+            <div class="testimonial-card__stars">★ ★ ★ ★ ★</div>
+            <div class="testimonial-card__author">
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+                alt="Abhay Kumar"
+                class="testimonial-card__avatar"
+              />
+              <div>
+                <div class="testimonial-card__name">Abhay Kumar</div>
+                <div class="testimonial-card__role">
+                  Father of Mishka, Bangalore
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__quote-mark">"</div>
+            <p class="testimonial-card__text">
+              Coding is the best investment I have done for my child. She is
+              having fun with coding and looks very enthusiastic to learn more.
+              I am very happy with Sanketana's teaching methodology.
+            </p>
+            <div class="testimonial-card__stars">★ ★ ★ ★ ★</div>
+            <div class="testimonial-card__author">
+              <img
+                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop&crop=face"
+                alt="Aarati Thacker"
+                class="testimonial-card__avatar"
+              />
+              <div>
+                <div class="testimonial-card__name">Aarati Thacker</div>
+                <div class="testimonial-card__role">
+                  Mother of Anant, Mumbai
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__quote-mark">"</div>
+            <p class="testimonial-card__text">
+              The course is very well organised and modules very well planned.
+              My son could easily adapt the learning. We found the teacher
+              extremely patient and well experienced for teaching kids.
+            </p>
+            <div class="testimonial-card__stars">★ ★ ★ ★ ★</div>
+            <div class="testimonial-card__author">
+              <img
+                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
+                alt="Mili Shah"
+                class="testimonial-card__avatar"
+              />
+              <div>
+                <div class="testimonial-card__name">Mili Shah</div>
+                <div class="testimonial-card__role">
+                  Mother of Aarush, Singapore
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== CTA ======== -->
+    <section class="cta">
+      <div class="cta__orb1"></div>
+      <div class="cta__orb2"></div>
+      <div class="container" style="position: relative; z-index: 2">
+        <p class="section-label">Get Started</p>
+        <h2 class="cta__title">
+          Explore Your Child's<br />Interest in <em>Coding</em>
+        </h2>
+        <p class="cta__desc">
+          Schedule a complimentary trial session. No commitment — just a
+          conversation about what's possible.
+        </p>
+        <div class="cta__actions">
+          <a href="https://sanketana.com/enquiry" class="btn-primary--bright"
+            >Book Free Trial →</a
+          >
+          <a href="tel:+919632321212" class="btn-ghost">Call +91 96323 21212</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======== FOOTER ======== -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__grid">
+          <div>
+            <div class="footer__brand-name">Sanketana</div>
+            <p class="footer__brand-desc">
+              Beyond Coding, Towards Creation. Personalized online coding
+              education for kids and teens since 2019.
+            </p>
+            <div class="footer__socials">
+              <a
+                href="https://facebook.com/sanketana"
+                class="footer__social-link"
+                aria-label="Facebook"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"
+                  />
+                </svg>
+              </a>
+              <a
+                href="https://www.youtube.com/channel/UCP8qpm-NZ7kB9wPFU58IJyg"
+                class="footer__social-link"
+                aria-label="YouTube"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"
+                  />
+                  <path
+                    d="M9.75 15.02l5.75-3.27-5.75-3.27v6.54z"
+                    fill="var(--navy-900)"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 class="footer__col-title">Programs</h4>
+            <ul class="footer__col-links">
+              <li><a href="#">Scratch Coding</a></li>
+              <li><a href="#">App Development</a></li>
+              <li><a href="#">Python</a></li>
+              <li><a href="#">Web Development</a></li>
+              <li><a href="#">Competitive Programming</a></li>
+              <li><a href="#">AI Fluency Lab</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer__col-title">Company</h4>
+            <ul class="footer__col-links">
+              <li>
+                <a href="https://sanketana.com/student-wall/">Student Wall</a>
+              </li>
+              <li>
+                <a href="https://sanketana.com/testimonials/">Testimonials</a>
+              </li>
+              <li><a href="https://sanketana.com/contact/">Contact Us</a></li>
+              <li>
+                <a href="https://sanketanaschool.zohocreatorportal.in/"
+                  >Student Login</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="footer__col-title">Contact</h4>
+            <ul class="footer__col-links">
+              <li><a href="tel:+919632321212">+91 96323 21212</a></li>
+              <li>
+                <a href="mailto:contact@sanketana.com">contact@sanketana.com</a>
+              </li>
+              <li style="color: var(--text-on-dark-dim); font-size: 0.875rem">
+                Nikoo-1, Bhartiya City<br />Bangalore, India 560064
+              </li>
+              <li style="color: var(--text-on-dark-dim); font-size: 0.875rem">
+                Mon–Sat, 10 AM – 9 PM
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p class="footer__copy">
+            © 2019–2026 Sanketana Academy. All rights reserved.
+          </p>
+          <div class="footer__legal">
+            <a href="https://sanketana.com/privacy-policy/">Privacy Policy</a>
+            <a href="https://sanketana.com/refund-cancellation/"
+              >Refund Policy</a
+            >
+            <a href="https://sanketana.com/terms-conditions/">Terms</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Nav scroll effect
+      window.addEventListener("scroll", () => {
+        document
+          .getElementById("mainNav")
+          .classList.toggle("scrolled", window.scrollY > 40);
+      });
+    </script>
+  </body>
+</html>
